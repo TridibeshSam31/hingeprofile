@@ -12,28 +12,30 @@ export type Message = {
 
 
 const MessageSchema = new mongoose.Schema<Message>({
-  sessionId:{
-    type:mongoose.Schema.Types.ObjectId,
-    ref:"InterviewSession",
-    required:true,
+  sessionId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "InterviewSession",
+    required: true,
   },
-  role:{
-    type:String,
-    enum:["user","assistant"],
-    required:true,
-    default:"user" //check it 
+  role: {
+    type: String,
+    enum: ["user", "assistant"],
+    required: true,
+    default: "user" //check it 
   },
-  content:{
-    type:String,
-    required:true
+  content: {
+    type: String,
+    required: true
   },
-  topicHint:{
-    type:String
+  topicHint: {
+    type: String
   },
-  createdAt:{
-    type:Date,
-    required:true,
-    default:Date.now,
-    Index:true
+  createdAt: {
+    type: Date,
+    required: true,
+    default: Date.now,
+    index: true
   }
 })
+
+export const MessageModel = mongoose.model<Message>("MessageSchema", MessageSchema);
