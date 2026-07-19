@@ -93,42 +93,38 @@ export default function ProfilePage() {
   if (!generatedProfile) return null;
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-12">
+    <div className="max-w-7xl mx-auto px-3.5 sm:px-6 py-6 sm:py-12 min-w-0">
       {/* ── Header Bar ──────────────────────────────── */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 mb-12 pb-6 border-b-4 border-ink animate-fade-in">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6 mb-8 sm:mb-12 pb-6 border-b-4 border-ink animate-fade-in">
         <div>
-          <div className="inline-flex items-center gap-2 rounded-full border-2 border-ink bg-[#C6FF4D] px-3.5 py-1 font-display text-xs font-black uppercase tracking-widest text-ink shadow-brutal-sm mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full border-2 border-ink bg-[#C6FF4D] px-3 py-0.5 sm:px-3.5 sm:py-1 font-display text-[10px] sm:text-xs font-black uppercase tracking-widest text-ink shadow-brutal-sm mb-2 sm:mb-3">
             <span className="h-2 w-2 rounded-full bg-ink" />
             <span>Finished Output</span>
           </div>
-          <h1 className="font-display text-3xl sm:text-5xl font-black uppercase tracking-tight text-ink">
-            YOUR <span className="inline-block -rotate-1 rounded-2xl border-4 border-ink bg-[#C6FF4D] px-3.5 py-0.5 text-ink shadow-[4px_4px_0px_#0c0b09]">HINGE PROFILE</span>
+          <h1 className="font-display text-2xl sm:text-5xl font-black uppercase tracking-tight text-ink leading-tight">
+            YOUR <span className="inline-block -rotate-1 rounded-xl sm:rounded-2xl border-3 sm:border-4 border-ink bg-[#C6FF4D] px-2.5 sm:px-3.5 py-0.5 text-ink shadow-[3px_3px_0px_#0c0b09] sm:shadow-[4px_4px_0px_#0c0b09]">HINGE PROFILE</span>
           </h1>
-          <p className="font-sans text-xs sm:text-sm font-bold text-ink/75 uppercase tracking-wider mt-2">
+          <p className="font-sans text-[11px] sm:text-sm font-bold text-ink/75 uppercase tracking-wider mt-2">
             Copy prompt answers right into Hinge. Regenerate any section anytime.
           </p>
         </div>
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
           <Link
             href="/interview"
-            className="rounded-xl border-3 border-ink bg-surface px-4 py-2.5 font-display text-xs font-black uppercase tracking-wider text-ink shadow-[4px_4px_0px_#0c0b09] transition-all hover:-translate-y-0.5 hover:bg-[#C6FF4D] hover:shadow-[6px_6px_0px_#0c0b09]"
+            className="flex-1 sm:flex-none text-center rounded-xl border-3 border-ink bg-surface px-4 py-2.5 font-display text-xs font-black uppercase tracking-wider text-ink shadow-[3px_3px_0px_#0c0b09] sm:shadow-[4px_4px_0px_#0c0b09] transition-all hover:-translate-y-0.5 hover:bg-[#C6FF4D]"
           >
-            <span className="flex items-center gap-2">
-              <Mic className="w-4 h-4 stroke-[2.5]" />
-              Re-interview
-            </span>
+            🎙️ Re-interview
           </Link>
           <RegenerateBtn onClick={regenerateProfile} loading={loading} />
         </div>
       </div>
 
       {/* ── Profile Content Grid ────────────────────── */}
-      <div className="grid lg:grid-cols-[430px_1fr] gap-12 items-start">
+      <div className="grid lg:grid-cols-[430px_1fr] gap-8 sm:gap-12 items-start">
         {/* Hinge Card Preview Column */}
-        <div className="sticky top-28">
-          <div className="inline-flex items-center gap-2 rounded-xl border-2 border-ink bg-ink px-3.5 py-1.5 font-display text-xs font-black uppercase tracking-widest text-[#C6FF4D] mb-4 shadow-[3px_3px_0px_#0c0b09]">
-            <Smartphone className="w-4 h-4 stroke-[2.5] text-[#C6FF4D]" />
-            <span>Profile Card Preview</span>
+        <div className="lg:sticky lg:top-28 w-full flex flex-col items-center sm:items-start">
+          <div className="inline-flex items-center gap-2 rounded-xl border-2 border-ink bg-ink px-3 py-1 sm:px-3.5 sm:py-1.5 font-display text-[11px] sm:text-xs font-black uppercase tracking-widest text-[#C6FF4D] mb-4 shadow-[3px_3px_0px_#0c0b09]">
+            <span>📱 Profile Card Preview</span>
           </div>
           <HingeCard profile={generatedProfile} />
         </div>

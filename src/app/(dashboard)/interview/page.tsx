@@ -68,23 +68,23 @@ export default function InterviewPage() {
           className="max-w-4xl w-full mx-auto"
         >
           {/* Main Hero Card */}
-          <div className="relative overflow-hidden rounded-[2.5rem] border-4 border-ink bg-surface p-6 sm:p-12 shadow-[12px_12px_0px_#0c0b09]">
+          <div className="relative overflow-hidden rounded-2xl sm:rounded-[2.5rem] border-3 sm:border-4 border-ink bg-surface p-4 sm:p-12 shadow-[6px_6px_0px_#0c0b09] sm:shadow-[12px_12px_0px_#0c0b09]">
             {/* Electric Lime backdrop badge */}
-            <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-              <div className="inline-flex items-center gap-2 rounded-full border-2 border-ink bg-[#C6FF4D] px-4 py-1.5 font-display text-xs font-black uppercase tracking-widest text-ink shadow-[3px_3px_0px_#0c0b09]">
-                <span className="h-2.5 w-2.5 rounded-full bg-ink animate-pulse" />
-                <span className="flex items-center gap-1.5"><Zap className="w-4 h-4 stroke-[2.5] fill-ink text-[#C6FF4D]" />3-Step Profile Engine</span>
+            <div className="mb-4 sm:mb-6 flex flex-wrap items-center justify-between gap-3">
+              <div className="inline-flex items-center gap-2 rounded-full border-2 border-ink bg-[#C6FF4D] px-3 sm:px-4 py-1 sm:py-1.5 font-display text-[10px] sm:text-xs font-black uppercase tracking-widest text-ink shadow-[2px_2px_0px_#0c0b09] sm:shadow-[3px_3px_0px_#0c0b09]">
+                <span className="h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-ink animate-pulse" />
+                <span className="flex items-center gap-1.5"><Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5] fill-ink text-[#C6FF4D]" />3-Step Profile Engine</span>
               </div>
-              <span className="flex items-center gap-1.5 rounded-xl border-2 border-ink bg-paper px-3 py-1 font-display text-xs font-black text-ink shadow-[2px_2px_0px_#0c0b09]">
+              <span className="flex items-center gap-1.5 rounded-xl border-2 border-ink bg-paper px-2.5 sm:px-3 py-1 font-display text-[10px] sm:text-xs font-black text-ink shadow-[2px_2px_0px_#0c0b09]">
                 <Clock className="w-3.5 h-3.5 stroke-[2.5]" />
                 <span>Avg 10 Mins</span>
               </span>
             </div>
 
             {/* Title & Subtitle */}
-            <h1 className="font-display text-3xl font-black uppercase tracking-tight text-ink sm:text-5xl leading-tight">
+            <h1 className="font-display text-2xl font-black uppercase tracking-tight text-ink sm:text-5xl leading-tight">
               Before we chat, here’s how your{' '}
-              <span className="inline-block -rotate-1 rounded-2xl border-4 border-ink bg-[#C6FF4D] px-3.5 py-0.5 text-ink shadow-[4px_4px_0px_#0c0b09]">
+              <span className="inline-block -rotate-1 rounded-xl sm:rounded-2xl border-3 sm:border-4 border-ink bg-[#C6FF4D] px-2.5 sm:px-3.5 py-0.5 text-ink shadow-[3px_3px_0px_#0c0b09] sm:shadow-[4px_4px_0px_#0c0b09]">
                 Profile writes itself.
               </span>
             </h1>
@@ -141,9 +141,9 @@ export default function InterviewPage() {
 
   // ── 2. ACTIVE INTERVIEW CHAT & SIDEBAR EXPERIENCE ─────────────────────────
   return (
-    <div className="flex h-[calc(100vh-5rem)] overflow-hidden bg-paper bg-dot-pattern">
+    <div className="flex h-[calc(100dvh-4rem)] sm:h-[calc(100dvh-5rem)] overflow-hidden bg-paper bg-dot-pattern">
       {/* ── Desktop Sidebar: Progress & Trait Breakdown ── */}
-      <aside className="hidden lg:flex w-88 flex-col gap-6 p-6 border-r-4 border-ink bg-surface overflow-y-auto custom-scrollbar">
+      <aside className="hidden lg:flex w-88 flex-col gap-6 p-6 border-r-4 border-ink bg-surface overflow-y-auto custom-scrollbar shrink-0">
         <div className="flex items-center gap-2 pb-3 border-b-3 border-ink/20">
           <span className="rounded-lg border-2 border-ink bg-[#C6FF4D] px-2 py-0.5 font-display text-xs font-black uppercase">
             Live Coach
@@ -176,20 +176,20 @@ export default function InterviewPage() {
       </aside>
 
       {/* ── Main Chat Area ──────────────────────────────── */}
-      <div className="flex-1 flex flex-col bg-paper">
+      <div className="flex-1 flex flex-col bg-paper min-w-0 overflow-hidden">
         {/* Header Bar */}
-        <div className="px-6 py-4 border-b-4 border-ink bg-surface flex items-center justify-between shadow-[0px_4px_0px_#0c0b09] z-10">
-          <div>
+        <div className="px-3 sm:px-6 py-2.5 sm:py-4 border-b-4 border-ink bg-surface flex items-center justify-between gap-2 shadow-[0px_4px_0px_#0c0b09] z-10 min-w-0">
+          <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">
-              <span className="h-2.5 w-2.5 rounded-full bg-[#C6FF4D] border border-ink animate-pulse" />
-              <h1 className="font-display text-lg sm:text-xl font-black uppercase tracking-tight text-ink">
+              <span className="h-2.5 w-2.5 rounded-full bg-[#C6FF4D] border border-ink animate-pulse shrink-0" />
+              <h1 className="font-display text-xs sm:text-xl font-black uppercase tracking-tight text-ink truncate">
                 YOUR AI COACHING SESSION
               </h1>
             </div>
-            <div className="font-sans text-xs font-bold text-ink/70 mt-0.5">
+            <div className="font-sans text-[10px] sm:text-xs font-bold text-ink/70 mt-0.5 truncate">
               {isComplete ? (
-                <span className="flex items-center gap-1.5 text-ink font-extrabold">
-                  <Trophy className="w-4 h-4 stroke-[2.5] text-[#C6FF4D] fill-ink" />
+                <span className="flex items-center gap-1.5 text-ink font-extrabold truncate">
+                  <Trophy className="w-3.5 h-3.5 stroke-[2.5] text-[#C6FF4D] fill-ink shrink-0" />
                   Target confidence met! Ready to generate.
                 </span>
               ) : (
@@ -199,14 +199,14 @@ export default function InterviewPage() {
           </div>
 
           {/* Mobile progress badge */}
-          <div className="lg:hidden flex items-center gap-2.5 rounded-xl border-2 border-ink bg-paper px-3 py-1.5 shadow-[2px_2px_0px_#0c0b09]">
-            <div className="w-16 h-2 rounded-full border border-ink bg-surface overflow-hidden">
+          <div className="lg:hidden flex items-center gap-1.5 sm:gap-2.5 rounded-xl border-2 border-ink bg-paper px-2 sm:px-3 py-1 sm:py-1.5 shadow-[2px_2px_0px_#0c0b09] shrink-0">
+            <div className="w-12 sm:w-16 h-2 rounded-full border border-ink bg-surface overflow-hidden">
               <div
                 className="h-full bg-[#C6FF4D] transition-all duration-300"
                 style={{ width: `${confidence.overall}%` }}
               />
             </div>
-            <span className="font-display text-xs font-black text-ink">
+            <span className="font-display text-[10px] sm:text-xs font-black text-ink">
               {confidence.overall}%
             </span>
           </div>

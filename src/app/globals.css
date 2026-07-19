@@ -61,6 +61,7 @@ html {
   scroll-behavior: smooth;
   background-color: var(--background);
   color: var(--foreground);
+  overflow-x: hidden;
 }
 
 body {
@@ -68,6 +69,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 /* ─── Dot grid background pattern ────────────────────────────────────── */

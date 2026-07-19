@@ -13,43 +13,43 @@ export default async function DashboardLayout({
   if (!userId) redirect('/sign-in');
 
   return (
-    <div className="min-h-screen flex flex-col bg-paper bg-dot-pattern">
+    <div className="min-h-screen flex flex-col bg-paper bg-dot-pattern overflow-x-hidden">
       {/* ── Top Nav Header (Neo-Brutalist Electric Lime Vibe) ────────────── */}
       <header className="sticky top-0 z-50 border-b-4 border-ink bg-surface shadow-[0px_4px_0px_#0c0b09]">
-        <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 h-20">
+        <nav className="max-w-7xl mx-auto flex items-center justify-between px-3 sm:px-6 h-16 sm:h-20 gap-2">
           {/* Logo */}
           <Link
             href="/"
-            className="group flex items-center gap-3 font-display text-xl font-black uppercase tracking-tight text-ink transition-transform duration-200 hover:scale-[1.02]"
+            className="group flex items-center gap-1.5 sm:gap-3 font-display text-base sm:text-xl font-black uppercase tracking-tight text-ink transition-transform duration-200 hover:scale-[1.02] shrink-0"
           >
-            <span className="rounded-xl border-3 border-ink bg-ink px-2.5 py-1 text-xs font-black tracking-widest text-[#C6FF4D] shadow-[3px_3px_0px_#C6FF4D] transition-all group-hover:bg-[#C6FF4D] group-hover:text-ink group-hover:shadow-[3px_3px_0px_#0c0b09]">
+            <span className="rounded-xl border-2 sm:border-3 border-ink bg-ink px-2 sm:px-2.5 py-0.5 sm:py-1 text-[11px] sm:text-xs font-black tracking-widest text-[#C6FF4D] shadow-[2px_2px_0px_#C6FF4D] sm:shadow-[3px_3px_0px_#C6FF4D] transition-all group-hover:bg-[#C6FF4D] group-hover:text-ink group-hover:shadow-[3px_3px_0px_#0c0b09]">
               HP.
             </span>
-            <span className="flex items-center">
-              Hinge<span className="rounded-md border-2 border-ink bg-[#C6FF4D] px-1.5 py-0.5 text-ink ml-1 shadow-brutal-sm">Profile</span>
+            <span className="hidden xs:flex items-center">
+              Hinge<span className="rounded-md border-2 border-ink bg-[#C6FF4D] px-1.5 py-0.5 text-ink ml-1 shadow-brutal-sm text-xs sm:text-base">Profile</span>
             </span>
           </Link>
 
           {/* Nav Links */}
-          <div className="flex items-center gap-3 sm:gap-6 font-display text-xs sm:text-sm font-black uppercase tracking-wider">
+          <div className="flex items-center gap-2 sm:gap-6 font-display text-xs sm:text-sm font-black uppercase tracking-wider">
             <Link
               href="/interview"
-              className="flex items-center gap-2 rounded-xl border-3 border-ink bg-[#C6FF4D] px-3.5 sm:px-4 py-2 text-ink shadow-[3px_3px_0px_#0c0b09] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[5px_5px_0px_#0c0b09]"
+              className="flex items-center gap-1.5 sm:gap-2 rounded-xl border-2 sm:border-3 border-ink bg-[#C6FF4D] px-2.5 sm:px-4 py-1.5 sm:py-2 text-ink shadow-[2px_2px_0px_#0c0b09] sm:shadow-[3px_3px_0px_#0c0b09] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[5px_5px_0px_#0c0b09] text-[11px] sm:text-xs"
             >
-              <span className="h-2 w-2 rounded-full bg-ink animate-pulse" />
+              <span className="h-2 w-2 rounded-full bg-ink animate-pulse shrink-0" />
               <span>Interview</span>
             </Link>
             <Link
               href="/profile"
-              className="flex items-center gap-2 rounded-xl border-3 border-ink bg-surface px-3.5 sm:px-4 py-2 text-ink shadow-[3px_3px_0px_#0c0b09] transition-all duration-150 hover:-translate-y-0.5 hover:bg-[#C6FF4D] hover:shadow-[5px_5px_0px_#0c0b09]"
+              className="flex items-center gap-1.5 sm:gap-2 rounded-xl border-2 sm:border-3 border-ink bg-surface px-2.5 sm:px-4 py-1.5 sm:py-2 text-ink shadow-[2px_2px_0px_#0c0b09] sm:shadow-[3px_3px_0px_#0c0b09] transition-all duration-150 hover:-translate-y-0.5 hover:bg-[#C6FF4D] hover:shadow-[5px_5px_0px_#0c0b09] text-[11px] sm:text-xs"
             >
-              <Sparkles className="w-4 h-4 stroke-[2.5] fill-[#C6FF4D]" />
+              <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5] fill-[#C6FF4D] shrink-0" />
               <span>Profile</span>
             </Link>
           </div>
 
           {/* User Button inside Neo-Brutalist Frame */}
-          <div className="rounded-xl border-3 border-ink bg-surface p-1 shadow-[3px_3px_0px_#0c0b09] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[5px_5px_0px_#0c0b09] flex items-center justify-center">
+          <div className="rounded-xl border-2 sm:border-3 border-ink bg-surface p-0.5 sm:p-1 shadow-[2px_2px_0px_#0c0b09] sm:shadow-[3px_3px_0px_#0c0b09] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[5px_5px_0px_#0c0b09] flex items-center justify-center shrink-0">
             <UserButton
               appearance={{
                 elements: {

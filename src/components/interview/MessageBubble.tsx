@@ -14,7 +14,7 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
   return (
     <div className={`flex w-full ${isAI ? 'justify-start' : 'justify-end'} animate-fade-in`}>
       <div
-        className={`max-w-[88%] sm:max-w-[78%] rounded-[1.5rem] border-3 border-ink px-5 py-4 text-sm leading-relaxed shadow-[4px_4px_0px_#0c0b09] transition-all ${
+        className={`max-w-[92%] sm:max-w-[78%] rounded-2xl sm:rounded-[1.5rem] border-3 border-ink px-3.5 sm:px-5 py-3 sm:py-4 text-xs sm:text-sm leading-relaxed shadow-[3px_3px_0px_#0c0b09] sm:shadow-[4px_4px_0px_#0c0b09] transition-all ${
           isAI
             ? 'rounded-bl-sm bg-surface text-ink'
             : 'rounded-br-sm bg-[#C6FF4D] text-ink font-bold'

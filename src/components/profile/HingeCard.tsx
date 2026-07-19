@@ -10,7 +10,7 @@ interface HingeCardProps {
 
 export default function HingeCard({ profile }: HingeCardProps) {
   return (
-    <div className="overflow-hidden rounded-[2.2rem] border-4 border-ink bg-surface shadow-[10px_10px_0px_#0c0b09] max-w-[420px] w-full animate-scale-in">
+    <div className="overflow-hidden rounded-[1.5rem] sm:rounded-[2.2rem] border-3 sm:border-4 border-ink bg-surface shadow-[6px_6px_0px_#0c0b09] sm:shadow-[10px_10px_0px_#0c0b09] max-w-[420px] w-full animate-scale-in">
       {/* ── Bio Section ──────────────────────────────── */}
       <div className="p-6 sm:p-7 border-b-4 border-ink bg-[#C6FF4D]/15">
         <div className="flex items-center justify-between mb-4">
