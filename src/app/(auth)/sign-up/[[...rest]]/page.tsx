@@ -8,7 +8,14 @@ export default function SignUpPage() {
       title="Create your account"
       subtitle="Two minutes to sign up, ten to chat — then your profile writes itself."
     >
-      <SignUp appearance={clerkAppearance} fallbackRedirectUrl="/interview" forceRedirectUrl="/interview" />
+      <SignUp
+        appearance={clerkAppearance}
+        routing="path"
+        path="/sign-up"
+        signInUrl="/sign-in"
+        fallbackRedirectUrl="/interview"
+        forceRedirectUrl="/interview"
+      />
     </AuthShell>
   );
 }

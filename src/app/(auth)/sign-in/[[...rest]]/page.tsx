@@ -5,10 +5,17 @@ export default function SignInPage() {
   return (
     <AuthShell
       eyebrow="Welcome back"
-      title="Good to see you again"
+      title="Sign in to your account"
       subtitle="Pick up right where your profile left off."
     >
-      <SignIn appearance={clerkAppearance} fallbackRedirectUrl="/interview" forceRedirectUrl="/interview" />
+      <SignIn
+        appearance={clerkAppearance}
+        routing="path"
+        path="/sign-in"
+        signUpUrl="/sign-up"
+        fallbackRedirectUrl="/interview"
+        forceRedirectUrl="/interview"
+      />
     </AuthShell>
   );
 }

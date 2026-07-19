@@ -80,7 +80,7 @@ export const clerkAppearance = {
     colorInputBackground: '#ffffff',
     colorInputText: '#0c0b09',
     borderRadius: '0.875rem',
-    fontFamily: 'var(--font-outfit), var(--font-bricolage), sans-serif',
+    fontFamily: 'var(--font-outfit), sans-serif',
   },
   elements: {
     rootBox: 'w-full !bg-transparent',
@@ -105,10 +105,12 @@ export const clerkAppearance = {
       '!font-display !font-black !text-ink !underline !decoration-[#C6FF4D] !decoration-4 !underline-offset-4 hover:!text-[#FF5C00] !transition-colors !ml-1',
     dividerLine: '!bg-ink/20 !h-0.5',
     dividerText: '!font-display !font-black !text-xs !uppercase !tracking-widest !text-ink/40 !px-3 !bg-transparent',
-    identityPreview: '!border-2 !border-ink !rounded-xl !p-3 !bg-surface !shadow-[2px_2px_0px_#0c0b09]',
-    identityPreviewText: '!font-bold !text-ink',
+    identityPreview: '!border-3 !border-ink !rounded-xl !p-3.5 !bg-surface !shadow-[3px_3px_0px_#0c0b09] !flex !items-center !justify-between !mb-4',
+    identityPreviewText: '!font-display !font-extrabold !text-ink !text-sm',
     identityPreviewEditButtonIcon: '!text-ink',
+    identityPreviewEditButton: '!font-display !font-black !text-ink !uppercase !text-xs hover:!text-[#FF5C00] !cursor-pointer',
     formResendCodeLink: '!font-display !font-bold !text-ink hover:!text-[#C6FF4D]',
+    otpCodeFieldInput: '!border-3 !border-ink !shadow-[3px_3px_0px_#0c0b09] !rounded-xl !bg-surface !font-display !font-black !text-ink focus:!shadow-[5px_5px_0px_#C6FF4D]',
     clerkLogo: 'hidden',
   },
 };
