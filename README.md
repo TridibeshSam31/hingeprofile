@@ -1,4 +1,4 @@
-# 💘 AI Dating Profile Coach
+# 💘  HingeProfile Coach
 
 An AI-powered dating profile generator that *interviews* you before writing a single word. Instead of asking you to describe yourself, it learns who you are through natural conversation — then crafts a Hinge profile that actually sounds like you.
 
@@ -25,6 +25,8 @@ The platform runs a conversational onboarding interview, gradually building a st
 - **Photo Suggestion Engine** — Recommends photo types based on your lifestyle (gym shots, travel pics, pet photos, etc.)
 - **Hinge-style Profile Preview** — See exactly how your profile looks before copying it over
 - **Streaming AI Responses** — Smooth, real-time chat experience via Vercel AI SDK
+- **Idempotent Profile Generation** — Refreshing the profile page returns the existing profile; only the Regenerate button creates new versions
+- **Profile Versioning** — Every regeneration creates a new version while archiving previous ones
 
 ---
 
@@ -32,15 +34,17 @@ The platform runs a conversational onboarding interview, gradually building a st
 
 | Layer | Technology |
 |-------|-----------|
-| Framework | Next.js 15 (App Router) |
+| Framework | Next.js 16 (App Router) |
 | Language | TypeScript |
-| Styling | Tailwind CSS, shadcn/ui, Framer Motion |
-| State | Zustand |
-| Forms | React Hook Form |
-| Data Fetching | TanStack Query |
+| Styling | Tailwind CSS, Framer Motion |
+| Icons | Lucide React |
+| State Management | Zustand |
+| Schema Validation | Zod |
 | Auth | Clerk |
 | Database | MongoDB Atlas + Mongoose |
-| AI | GPT-4o via Vercel AI SDK |
+| AI | Google Gemini via Vercel AI SDK (`@ai-sdk/google`) |
+| Smooth Scroll | Lenis |
+| Webhooks | Svix (Clerk webhook verification) |
 | Deployment | Vercel |
 
 ---
@@ -48,48 +52,150 @@ The platform runs a conversational onboarding interview, gradually building a st
 ## 🔄 Product Flow
 
 ```
-User Signs Up
+User Signs Up (Clerk Auth)
     ↓
-AI Interview (natural conversation)
+AI Interview (natural conversation with streaming responses)
     ↓
-Personality Extraction Agent
+Interview End → Personality Extraction Agent
     ↓
 Prompt Recommendation Engine
     ↓
-Answer Generator + Bio Generator + Photo Suggestions
+Answer Generator + Bio Generator + Photo Advisor
     ↓
 Profile Composer
     ↓
-Hinge-style Preview → Copy / Export
+Hinge-style Preview → Copy / Regenerate
 ```
 
 ---
 
 ## 🤖 AI Pipeline
 
-The system runs a 7-step pipeline:
+The system runs a 7-agent pipeline:
 
-1. **Interview Agent** — Conducts the conversation, builds context, stores history
-2. **Personality Extraction Agent** — Converts conversation → structured JSON profile
-3. **Prompt Recommendation Engine** — Matches personality traits to the best-fit Hinge prompts
-4. **Prompt Answer Generator** — Writes personalized answers per selected prompt
-5. **Bio Generator** — Creates bio, description, and tagline from the personality profile
-6. **Photo Recommendation Engine** — Suggests photo types based on lifestyle data
-7. **Profile Composer** — Assembles everything into a single renderable profile object
+1. **Interview Agent** (`InterviewAgent.ts`) — Conducts the conversation, builds context, stores message history
+2. **Personality Extractor** (`PersonalityExtractor.ts`) — Converts conversation transcript → structured JSON personality profile
+3. **Prompt Recommender** (`PromptRecommender.ts`) — Matches personality traits to the best-fit Hinge prompts
+4. **Answer Generator** (`AnswerGenerator.ts`) — Writes personalized answers per selected prompt
+5. **Bio Generator** (`BioGenerator.ts`) — Creates bio and tagline from the personality profile
+6. **Photo Advisor** (`PhotoAdvisor.ts`) — Suggests photo types and compositions based on lifestyle data
+7. **Profile Composer** (`ProfileComposer.ts`) — Assembles everything into a single renderable profile object
+
+Supporting modules:
+- `confidence.ts` — Scores traits and detects coverage gaps
+- `questionEngine.ts` — Picks the next question topic based on current confidence scores
+- `client.ts` — Vercel AI SDK + model provider setup
+
+---
+
+## 🌐 API Routes
+
+### Interview
+
+| Method | Route | Description |
+|--------|-------|-------------|
+| `POST` | `/api/interview/start` | Initialize a new interview session |
+| `POST` | `/api/interview/message` | Send a message and stream AI reply |
+| `POST` | `/api/interview/end` | Close session and trigger personality extraction |
+
+### Profile
+
+| Method | Route | Description |
+|--------|-------|-------------|
+| `GET` | `/api/profile/latest` | Fetch the user's latest active profile (no generation) |
+| `POST` | `/api/profile/generate` | Generate initial profile (idempotent — returns existing if one exists) |
+| `POST` | `/api/profile/regenerate` | Create a new profile version (archives previous) |
+| `GET` | `/api/profile/[id]` | Fetch a specific saved profile by ID |
+
+### Other
+
+| Method | Route | Description |
+|--------|-------|-------------|
+| `GET` | `/api/personality` | Return current personality profile |
+| `GET` | `/api/prompts` | List available Hinge prompts |
+| `POST` | `/api/webhooks/clerk` | Clerk `user.created` webhook sync |
 
 ---
 
 ## 📦 MongoDB Collections
 
+| Collection | Model | Description |
+|-----------|-------|-------------|
+| `users` | `User` | User account linked to Clerk |
+| `interviewsessions` | `InterviewSession` | Chat sessions with embedded messages |
+| `personalityprofiles` | `PersonalityProfile` | Structured personality data extracted from interviews |
+| `generatedprofiles` | `GeneratedProfile` | Generated Hinge profiles with versioning |
+| `promptlibraries` | `PromptLibrary` | Hinge prompt catalog with metadata |
+| `feedbacks` | `Feedback` | User feedback on generated content |
+
+---
+
+## 📁 Project Structure
+
 ```
-Users
-InterviewSessions
-Messages
-PersonalityProfiles
-GeneratedProfiles
-PromptLibrary
-PhotoSuggestions
-Feedback
+src/
+├── app/
+│   ├── (auth)/                          # Clerk sign-in / sign-up pages
+│   ├── (dashboard)/
+│   │   ├── layout.tsx                   # Auth guard layout
+│   │   ├── interview/page.tsx           # Chat UI with onboarding flow
+│   │   └── profile/
+│   │       ├── page.tsx                 # Hinge profile preview
+│   │       └── regenerate/page.tsx
+│   ├── api/
+│   │   ├── interview/
+│   │   │   ├── start/route.ts
+│   │   │   ├── message/route.ts
+│   │   │   └── end/route.ts
+│   │   ├── profile/
+│   │   │   ├── generate/route.ts        # Idempotent initial generation
+│   │   │   ├── latest/route.ts          # GET latest active profile
+│   │   │   ├── regenerate/route.ts      # New version creation
+│   │   │   └── [id]/route.ts
+│   │   ├── personality/route.ts
+│   │   ├── prompts/route.ts
+│   │   └── webhooks/clerk/route.ts
+│   ├── page.tsx                         # Landing page
+│   ├── layout.tsx
+│   └── globals.css
+│
+├── components/
+│   ├── auth/                            # Auth-related components
+│   ├── interview/
+│   │   ├── ChatWindow.tsx
+│   │   ├── MessageBubble.tsx
+│   │   ├── TypingIndicator.tsx
+│   │   ├── ProgressBar.tsx
+│   │   └── InterviewInput.tsx
+│   ├── landing/                         # Landing page sections
+│   ├── profile/
+│   │   ├── HingeCard.tsx
+│   │   ├── PromptCard.tsx
+│   │   ├── PhotoSlot.tsx
+│   │   ├── RegenerateBtn.tsx
+│   │   └── CopyButton.tsx
+│   └── ui/                             # Shared UI primitives
+│
+├── lib/
+│   ├── ai/
+│   │   ├── agents/                      # 7 AI pipeline agents
+│   │   ├── prompts/                     # System prompt templates
+│   │   ├── confidence.ts
+│   │   ├── questionEngine.ts
+│   │   └── client.ts                    # AI SDK + model setup
+│   ├── db/
+│   │   ├── models/                      # Mongoose schemas
+│   │   ├── connect.ts                   # Singleton DB connection
+│   │   └── seed.ts                      # Seed PromptLibrary
+│   ├── store/
+│   │   ├── interviewStore.ts            # Zustand: messages, session, status
+│   │   └── profileStore.ts             # Zustand: generated profile, loading
+│   ├── types/                           # TypeScript type definitions
+│   ├── utils/                           # Validators, helpers
+│   ├── auth.ts                          # Clerk helpers
+│   └── constants.ts                     # Personality categories, thresholds
+│
+└── middleware.ts                        # Clerk route protection
 ```
 
 ---
@@ -100,13 +206,13 @@ Feedback
 
 - Node.js 20+
 - MongoDB Atlas cluster
-- OpenAI API key
+- Google AI API key (Gemini)
 - Clerk account
 
 ### Installation
 
 ```bash
-git clone https://github.com/your-username/hingeprofile.git
+git clone https://github.com/Ayush042004/hingeprofile.git
 cd hingeprofile
 npm install
 ```
@@ -126,8 +232,14 @@ NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
 # MongoDB
 MONGODB_URI=
 
-# OpenAI
-OPENAI_API_KEY=
+# Google AI (Gemini)
+GOOGLE_GENERATIVE_AI_API_KEY=
+```
+
+### Seed the Prompt Library
+
+```bash
+npm run seed
 ```
 
 ### Run
@@ -140,6 +252,29 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ---
 
+## 🏛️ Architecture
+
+```
+┌────────────────────────────────────────────┐
+│              Next.js Frontend              │
+│  (React 19 + Zustand + Framer Motion)      │
+└──────────────────┬─────────────────────────┘
+                   │
+┌──────────────────▼─────────────────────────┐
+│        Next.js Route Handlers (API)        │
+│   Interview · Profile · Personality · ...  │
+└──────┬───────────────────────┬─────────────┘
+       │                       │
+┌──────▼──────┐    ┌───────────▼─────────────┐
+│  MongoDB    │    │  Google Gemini API       │
+│  Atlas      │    │  (via Vercel AI SDK)     │
+└─────────────┘    └─────────────────────────┘
+```
+
+The frontend never communicates directly with the LLM — all AI calls are proxied through server-side route handlers.
+
+---
+
 ## 🛣️ Roadmap
 
 - [ ] AI Photo Rating & Ranking
@@ -149,20 +284,6 @@ Open [http://localhost:3000](http://localhost:3000).
 - [ ] Multi-app support (Bumble, Tinder, etc.)
 - [ ] AI Match Prediction
 - [ ] Vision model integration for photo scoring
-
----
-
-## 🏛️ Architecture
-
-```
-Next.js Frontend
-      ↓
-Next.js Route Handlers (Backend)
-      ↓
-MongoDB Atlas          OpenAI API
-```
-
-The frontend never communicates directly with the LLM — all AI calls are proxied through the backend.
 
 ---
 
