@@ -18,8 +18,8 @@ export default function ChatWindow({ messages, isStreaming }: ChatWindowProps) {
   }, [messages, isStreaming]);
 
   return (
-    <div className="flex-1 overflow-y-auto custom-scrollbar px-4 py-6">
-      <div className="max-w-2xl mx-auto flex flex-col gap-4">
+    <div className="flex-1 overflow-y-auto custom-scrollbar px-4 sm:px-8 py-6">
+      <div className="max-w-3xl mx-auto flex flex-col gap-5">
         {messages.map((msg, i) => (
           <MessageBubble
             key={`${msg.role}-${i}`}

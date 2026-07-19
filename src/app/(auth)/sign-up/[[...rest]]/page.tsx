@@ -1,19 +1,14 @@
 import { SignUp } from '@clerk/nextjs';
+import { AuthShell, clerkAppearance } from '@/components/auth/AuthShell';
 
 export default function SignUpPage() {
   return (
-    <main className="min-h-screen flex items-center justify-center bg-background hero-gradient-dark px-4">
-      <div className="animate-scale-in">
-        <SignUp
-          appearance={{
-            elements: {
-              formButtonPrimary:
-                'bg-gradient-to-r from-primary to-accent hover:opacity-90',
-              card: 'bg-surface border border-border shadow-xl',
-            },
-          }}
-        />
-      </div>
-    </main>
+    <AuthShell
+      eyebrow="Let's begin"
+      title="Create your account"
+      subtitle="Two minutes to sign up, ten to chat — then your profile writes itself."
+    >
+      <SignUp appearance={clerkAppearance} fallbackRedirectUrl="/interview" forceRedirectUrl="/interview" />
+    </AuthShell>
   );
 }

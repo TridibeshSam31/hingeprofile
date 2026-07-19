@@ -8,6 +8,24 @@
   --primary-yellow: #F0C020;
   --border: #121212;
   --muted: #888888;
+
+  /* Editorial Neo-brutalist Palette (ported from hingeprofile-frontend) */
+  --ink: #0c0b09;
+  --paper: #f3eee2;
+  --paper-dim: #e9e2d0;
+  --surface: #fffdf8;
+  --line: rgba(12, 11, 9, 0.14);
+  --line-dark: rgba(243, 238, 226, 0.18);
+
+  --accent: #4a35ff;
+  --accent-ink: #ffffff;
+  --highlight: #ffe347;
+  --good: #00a878;
+  --flag: #e8432f;
+
+  --shadow-sm: 3px 3px 0 0 var(--ink);
+  --shadow-md: 5px 5px 0 0 var(--ink);
+  --shadow-lg: 8px 8px 0 0 var(--ink);
 }
 
 @theme inline {
@@ -19,6 +37,18 @@
   --color-border: var(--border);
   --color-muted: var(--muted);
   --font-sans: var(--font-outfit), 'Outfit', system-ui, sans-serif;
+
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-paper-dim: var(--paper-dim);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-highlight: var(--highlight);
+  --color-good: var(--good);
+  --color-flag: var(--flag);
+  --font-display: var(--font-outfit), 'Outfit', system-ui, sans-serif;
 }
 
 /* ─── Bauhaus Core Base Styles ────────────────────────────────────────── */
@@ -50,6 +80,209 @@ body {
 .bg-dot-pattern-light {
   background-image: radial-gradient(rgba(255, 255, 255, 0.25) 1.5px, transparent 1.5px);
   background-size: 20px 20px;
+}
+
+/* ─── Editorial / Neo-brutalist Primitives (ported from hingeprofile-frontend) ─── */
+
+.hairline {
+  border-color: var(--line);
+}
+.hairline-dark {
+  border-color: var(--line-dark);
+}
+
+.shadow-brutal-sm {
+  box-shadow: var(--shadow-sm);
+}
+.shadow-brutal {
+  box-shadow: var(--shadow-md);
+}
+.shadow-brutal-lg {
+  box-shadow: var(--shadow-lg);
+}
+
+.press {
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+.press:hover {
+  transform: translate(-2px, -2px);
+}
+.press:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 0 var(--ink) !important;
+}
+
+.press-sm {
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+.press-sm:hover {
+  transform: translate(-1px, -1px);
+}
+.press-sm:active {
+  transform: translate(1px, 1px);
+  box-shadow: 0 0 0 0 var(--ink) !important;
+}
+
+.dotted-bg {
+  background-image: radial-gradient(var(--ink) 1px, transparent 1px);
+  background-size: 22px 22px;
+  background-position: -8px -8px;
+  opacity: 0.06;
+}
+
+/* Grain overlay — dark editorial sections get a subtle noise texture */
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(var(--r, -6deg)); }
+  50% { transform: translateY(-10px) rotate(var(--r, -6deg)); }
+}
+.float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+/* ==========================================================
+   CLERK NEO-BRUTALIST GLOBAL CSS OVERRIDES
+   ========================================================== */
+.cl-card, .cl-cardBox, .cl-rootBox {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Completely strip out any dark/black footer background */
+.cl-footer, .cl-footerAction, [class*="cl-footer"], [class*="cl-internal"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.cl-footer {
+  padding-top: 1.5rem !important;
+}
+
+.cl-footerActionText, .cl-footerActionLink {
+  color: #0c0b09 !important;
+  font-weight: 800 !important;
+  font-family: var(--font-outfit), sans-serif !important;
+}
+
+.cl-footerActionLink {
+  text-decoration: underline !important;
+  text-decoration-color: #C6FF4D !important;
+  text-decoration-thickness: 3px !important;
+  text-underline-offset: 4px !important;
+  margin-left: 0.35rem !important;
+}
+.cl-footerActionLink:hover {
+  color: #FF5C00 !important;
+}
+
+.cl-socialButtonsBlockButton {
+  border: 3px solid #0c0b09 !important;
+  background-color: #FFFDF8 !important;
+  box-shadow: 4px 4px 0px #0c0b09 !important;
+  border-radius: 0.875rem !important;
+  font-weight: 800 !important;
+  color: #0c0b09 !important;
+  transition: all 0.2s ease !important;
+  padding: 0.85rem 1rem !important;
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+}
+.cl-socialButtonsBlockButton:hover {
+  background-color: #C6FF4D !important;
+  box-shadow: 6px 6px 0px #0c0b09 !important;
+  transform: translate(-2px, -2px) !important;
+}
+.cl-socialButtonsBlockButtonText {
+  font-family: var(--font-outfit), sans-serif !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: #0c0b09 !important;
+  font-size: 0.8rem !important;
+}
+
+.cl-formButtonPrimary {
+  border: 4px solid #0c0b09 !important;
+  background-color: #0c0b09 !important;
+  color: #C6FF4D !important;
+  box-shadow: 6px 6px 0px #0c0b09 !important;
+  border-radius: 0.875rem !important;
+  font-family: var(--font-outfit), sans-serif !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  font-size: 0.95rem !important;
+  padding: 1rem !important;
+  margin-top: 1rem !important;
+  transition: all 0.2s ease !important;
+  width: 100% !important;
+  cursor: pointer !important;
+}
+.cl-formButtonPrimary:hover {
+  background-color: #C6FF4D !important;
+  color: #0c0b09 !important;
+  box-shadow: 8px 8px 0px #0c0b09 !important;
+  transform: translate(-2px, -2px) !important;
+}
+.wiggle-hover:hover {
+  animation: wiggle 400ms ease-in-out;
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee-scroll 26s linear infinite;
+}
+.marquee-track-slow {
+  animation: marquee-scroll 45s linear infinite;
+}
+
+/* Horizontal scroll-snap cases */
+.snap-x-mandatory {
+  scroll-snap-type: x mandatory;
+}
+.snap-start {
+  scroll-snap-align: start;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-slow, .marquee-track, .marquee-track-slow, .wiggle-hover:hover {
+    animation: none !important;
+  }
+  .press:hover, .press:active, .press-sm:hover, .press-sm:active {
+    transform: none !important;
+  }
 }
 
 /* ─── Mechanical / Snappy Transitions ────────────────────────────────── */

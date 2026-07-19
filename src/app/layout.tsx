@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { ClerkProvider } from '@clerk/nextjs'
 import { Outfit } from 'next/font/google'
+import { SmoothScroll } from '@/components/ui/SmoothScroll'
 import './globals.css'
 
 const outfit = Outfit({
@@ -23,8 +24,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${outfit.variable} font-sans antialiased bg-[#F0F0F0] text-[#121212]`}>
-        <ClerkProvider afterSignInUrl="/interview" afterSignUpUrl="/interview">
-          {children}
+        <ClerkProvider signInFallbackRedirectUrl="/interview" signUpFallbackRedirectUrl="/interview">
+          <SmoothScroll>
+            {children}
+          </SmoothScroll>
         </ClerkProvider>
       </body>
     </html>

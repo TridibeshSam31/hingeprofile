@@ -1,20 +1,14 @@
 import { SignIn } from '@clerk/nextjs';
+import { AuthShell, clerkAppearance } from '@/components/auth/AuthShell';
 
 export default function SignInPage() {
   return (
-    <main className="min-h-screen flex items-center justify-center bg-background hero-gradient-dark px-4">
-      <div className="animate-scale-in">
-        <SignIn
-          forceRedirectUrl="/interview"
-          appearance={{
-            elements: {
-              formButtonPrimary:
-                'bg-gradient-to-r from-primary to-accent hover:opacity-90',
-              card: 'bg-surface border border-border shadow-xl',
-            },
-          }}
-        />
-      </div>
-    </main>
+    <AuthShell
+      eyebrow="Welcome back"
+      title="Good to see you again"
+      subtitle="Pick up right where your profile left off."
+    >
+      <SignIn appearance={clerkAppearance} fallbackRedirectUrl="/interview" forceRedirectUrl="/interview" />
+    </AuthShell>
   );
 }

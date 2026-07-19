@@ -12,40 +12,54 @@ export default async function DashboardLayout({
   if (!userId) redirect('/sign-in');
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F0F0F0] bg-dot-pattern">
-      {/* ── Top nav ─────────────────────────────────────── */}
-      <header className="sticky top-0 z-50 bg-white border-b-4 border-[#121212]">
-        <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 h-16">
-          <Link href="/interview" className="flex items-center gap-3 font-black text-lg uppercase tracking-tighter">
-            {/* Bauhaus Geometric Logo */}
-            <div className="flex items-center gap-1">
-              <div className="w-5 h-5 rounded-full bg-[#D02020] border-2 border-[#121212]" />
-              <div className="w-5 h-5 bg-[#1040C0] border-2 border-[#121212]" />
-              <div className="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[18px] border-b-[#F0C020]" style={{ filter: 'drop-shadow(2px 2px 0px #121212)' }} />
-            </div>
-            <span>ProfileCoach</span>
+    <div className="min-h-screen flex flex-col bg-paper bg-dot-pattern">
+      {/* ── Top Nav Header (Neo-Brutalist Electric Lime Vibe) ────────────── */}
+      <header className="sticky top-0 z-50 border-b-4 border-ink bg-surface shadow-[0px_4px_0px_#0c0b09]">
+        <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 h-20">
+          {/* Logo */}
+          <Link
+            href="/"
+            className="group flex items-center gap-3 font-display text-xl font-black uppercase tracking-tight text-ink transition-transform duration-200 hover:scale-[1.02]"
+          >
+            <span className="rounded-xl border-3 border-ink bg-ink px-2.5 py-1 text-xs font-black tracking-widest text-[#C6FF4D] shadow-[3px_3px_0px_#C6FF4D] transition-all group-hover:bg-[#C6FF4D] group-hover:text-ink group-hover:shadow-[3px_3px_0px_#0c0b09]">
+              HP.
+            </span>
+            <span className="flex items-center">
+              Hinge<span className="rounded-md border-2 border-ink bg-[#C6FF4D] px-1.5 py-0.5 text-ink ml-1 shadow-brutal-sm">Profile</span>
+            </span>
           </Link>
 
-          <div className="flex items-center gap-6 h-full font-bold text-sm uppercase tracking-wider">
-            <Link href="/interview" className="hover:text-[#D02020] transition-colors py-5 border-b-4 border-transparent hover:border-[#D02020]">
-              🎙️ Interview
+          {/* Nav Links */}
+          <div className="flex items-center gap-3 sm:gap-6 font-display text-xs sm:text-sm font-black uppercase tracking-wider">
+            <Link
+              href="/interview"
+              className="flex items-center gap-2 rounded-xl border-3 border-ink bg-[#C6FF4D] px-3.5 sm:px-4 py-2 text-ink shadow-[3px_3px_0px_#0c0b09] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[5px_5px_0px_#0c0b09]"
+            >
+              <span className="h-2 w-2 rounded-full bg-ink animate-pulse" />
+              <span>Interview</span>
             </Link>
-            <Link href="/profile" className="hover:text-[#1040C0] transition-colors py-5 border-b-4 border-transparent hover:border-[#1040C0]">
-              ✨ Profile
+            <Link
+              href="/profile"
+              className="flex items-center gap-2 rounded-xl border-3 border-ink bg-surface px-3.5 sm:px-4 py-2 text-ink shadow-[3px_3px_0px_#0c0b09] transition-all duration-150 hover:-translate-y-0.5 hover:bg-[#C6FF4D] hover:shadow-[5px_5px_0px_#0c0b09]"
+            >
+              <span>✨ Profile</span>
             </Link>
           </div>
 
-          <UserButton
-            appearance={{
-              elements: {
-                avatarBox: 'w-9 h-9 border-2 border-[#121212] rounded-none shadow-[2px_2px_0px_0px_#121212]',
-              },
-            }}
-          />
+          {/* User Button inside Neo-Brutalist Frame */}
+          <div className="rounded-xl border-3 border-ink bg-surface p-1 shadow-[3px_3px_0px_#0c0b09] flex items-center justify-center">
+            <UserButton
+              appearance={{
+                elements: {
+                  avatarBox: 'w-8 h-8 rounded-lg border-2 border-ink shadow-none',
+                },
+              }}
+            />
+          </div>
         </nav>
       </header>
 
-      {/* ── Content ─────────────────────────────────────── */}
+      {/* ── Content ──────────────────────────────────────────────────────── */}
       <main className="flex-1 flex flex-col">{children}</main>
     </div>
   );

@@ -10,33 +10,33 @@ interface HingeCardProps {
 
 export default function HingeCard({ profile }: HingeCardProps) {
   return (
-    <div className="bg-white border-4 border-[#121212] shadow-[8px_8px_0px_0px_#121212] rounded-none overflow-hidden max-w-[400px] w-full animate-scale-in">
+    <div className="overflow-hidden rounded-[2.2rem] border-4 border-ink bg-surface shadow-[10px_10px_0px_#0c0b09] max-w-[420px] w-full animate-scale-in">
       {/* ── Bio Section ──────────────────────────────── */}
-      <div className="p-6 border-b-4 border-[#121212]">
+      <div className="p-6 sm:p-7 border-b-4 border-ink bg-[#C6FF4D]/15">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
-            <div className="w-3.5 h-3.5 rounded-full bg-[#D02020] border border-[#121212]" />
-            <h3 className="text-xs font-black uppercase tracking-wider text-[#121212]">
-              Your Bio
+            <span className="h-3 w-3 rounded-full bg-[#C6FF4D] border-2 border-ink animate-pulse" />
+            <h3 className="font-display text-xs font-black uppercase tracking-widest text-ink">
+              Your Hinge Bio
             </h3>
           </div>
           <CopyButton text={profile.bio} />
         </div>
-        <p className="text-xl font-bold leading-tight text-[#121212] tracking-tight">
+        <p className="font-sans text-lg sm:text-xl font-extrabold leading-snug text-ink tracking-tight">
           {profile.bio}
         </p>
         <div className="mt-4 flex items-center gap-2">
-          <span className="text-[9px] font-black uppercase px-2 py-0.5 border border-[#121212] bg-[#1040C0] text-white">
+          <span className="rounded-md border-2 border-ink bg-ink px-2 py-0.5 font-display text-[9px] font-black uppercase tracking-wider text-[#C6FF4D]">
             {profile.style}
           </span>
-          <span className="text-[9px] font-bold text-neutral-500">
+          <span className="font-display text-[9px] font-bold text-ink/50">
             V{profile.version}
           </span>
         </div>
       </div>
 
       {/* ── Prompt Answers ────────────────────────────── */}
-      <div className="divide-y-4 divide-[#121212]">
+      <div className="divide-y-3 divide-ink">
         {profile.promptAnswers.map((pa, i) => (
           <PromptCard
             key={`${pa.promptId}-${i}`}

@@ -33,40 +33,44 @@ export default function PhotoSlot({
   required,
 }: PhotoSlotProps) {
   return (
-    <div className="relative bg-white border-4 border-[#121212] p-6 shadow-[6px_6px_0px_0px_#121212] flex flex-col justify-between min-h-[300px] rounded-none animate-fade-in-up group hover:-translate-y-1 transition-transform">
-      {/* Bauhaus Number Badge */}
-      <div className="absolute top-[-4px] left-[-4px] w-9 h-9 bg-[#F0C020] text-[#121212] border-r-4 border-b-4 border-[#121212] font-black text-sm flex items-center justify-center">
+    <div className="group relative flex flex-col justify-between rounded-3xl border-4 border-ink bg-surface p-6 shadow-[8px_8px_0px_#0c0b09] transition-all duration-200 hover:-translate-y-1 hover:shadow-[10px_10px_0px_#C6FF4D] min-h-[310px]">
+      {/* Number Badge */}
+      <div className="absolute -top-3 -left-3 flex h-10 w-10 items-center justify-center rounded-xl border-3 border-ink bg-[#C6FF4D] font-display text-sm font-black text-ink shadow-[3px_3px_0px_#0c0b09]">
         {order}
       </div>
 
-      <div className="pt-6 space-y-3">
-        <div className="flex items-center justify-between gap-2">
-          <span className="text-xl ml-auto">{TYPE_EMOJI[photoType] || '📷'}</span>
+      <div className="pt-4 space-y-3">
+        <div className="flex items-center justify-end">
+          <span className="text-2xl">{TYPE_EMOJI[photoType] || '📷'}</span>
         </div>
 
         <div className="space-y-1">
-          <h4 className="font-black text-base uppercase tracking-tighter text-[#121212] leading-tight">{title}</h4>
-          <span className="inline-block text-[9px] font-black uppercase px-2 py-0.5 border border-[#121212] bg-[#1040C0] text-white">
+          <h4 className="font-display text-lg font-black uppercase tracking-tight text-ink leading-tight">
+            {title}
+          </h4>
+          <span className="inline-block rounded-md border-2 border-ink bg-paper px-2 py-0.5 font-display text-[10px] font-black uppercase tracking-wider text-ink">
             {photoType}
           </span>
         </div>
 
-        <p className="text-xs font-semibold text-[#121212] leading-relaxed">{description}</p>
+        <p className="font-sans text-xs font-semibold text-ink/80 leading-relaxed">
+          {description}
+        </p>
       </div>
 
-      <div className="w-full pt-4 mt-4 border-t-2 border-[#121212] space-y-2">
-        <p className="text-[11px] font-bold text-neutral-500 leading-normal">
-          <span className="font-black text-[#121212]">WHY: </span>
+      <div className="mt-5 pt-4 border-t-2 border-ink/20 space-y-2.5">
+        <p className="font-sans text-[11px] font-medium text-ink/75 leading-normal">
+          <span className="font-display font-black text-ink uppercase">Why: </span>
           {reason}
         </p>
         {caption && (
-          <p className="text-[11px] font-black text-[#D02020] bg-[#F0F0F0] border border-[#121212] p-1.5 leading-snug">
+          <div className="rounded-xl border-2 border-ink bg-[#C6FF4D]/25 p-2.5 font-sans text-xs font-bold text-ink leading-snug">
             💬 &ldquo;{caption}&rdquo;
-          </p>
+          </div>
         )}
         {required && (
-          <span className="inline-block text-[9px] font-black bg-[#D02020] text-white border border-[#121212] px-2 py-0.5 uppercase tracking-wider">
-            ★ Essential
+          <span className="inline-block rounded-md border border-ink bg-ink px-2 py-0.5 font-display text-[9px] font-black uppercase tracking-wider text-[#C6FF4D]">
+            ★ Essential Shot
           </span>
         )}
       </div>

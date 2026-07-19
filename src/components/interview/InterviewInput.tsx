@@ -11,7 +11,7 @@ interface InterviewInputProps {
 export default function InterviewInput({
   onSend,
   disabled = false,
-  placeholder = 'Type your answer...',
+  placeholder = 'Type your answer naturally...',
 }: InterviewInputProps) {
   const [value, setValue] = useState('');
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -24,7 +24,6 @@ export default function InterviewInput({
     onSend(trimmed);
     setValue('');
 
-    // Re-focus after sending
     setTimeout(() => inputRef.current?.focus(), 50);
   };
 
@@ -38,7 +37,7 @@ export default function InterviewInput({
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex items-end gap-4 p-4 border-t-4 border-[#121212] bg-white"
+      className="flex items-end gap-3 p-4 sm:p-6 border-t-4 border-ink bg-surface shadow-[0px_-4px_0px_#0c0b09]"
     >
       <div className="flex-1 relative">
         <textarea
@@ -49,24 +48,24 @@ export default function InterviewInput({
           placeholder={placeholder}
           disabled={disabled}
           rows={1}
-          className="w-full resize-none rounded-none border-4 border-[#121212] bg-[#F0F0F0] px-4 py-3 text-sm text-[#121212] placeholder:text-neutral-500 font-bold focus:outline-none focus:bg-white shadow-[3px_3px_0px_0px_#121212] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          style={{ minHeight: '48px', maxHeight: '120px' }}
+          className="w-full resize-none rounded-2xl border-3 border-ink bg-paper px-4 sm:px-5 py-3.5 text-sm sm:text-[15px] font-bold text-ink placeholder:text-ink/40 shadow-[3px_3px_0px_#0c0b09] transition-all focus:bg-white focus:outline-none focus:shadow-[5px_5px_0px_#C6FF4D] disabled:opacity-50 disabled:cursor-not-allowed"
+          style={{ minHeight: '52px', maxHeight: '130px' }}
         />
       </div>
 
       <button
         type="submit"
         disabled={disabled || !value.trim()}
-        className="btn-primary h-12 w-12 p-0 flex-shrink-0 rounded-none bg-[#D02020] border-4 border-[#121212] shadow-[4px_4px_0px_0px_#121212] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-[4px_4px_0px_0px_#121212]"
+        className="flex h-13 w-13 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-2xl border-3 border-ink bg-ink text-[#C6FF4D] shadow-[4px_4px_0px_#0c0b09] transition-all duration-150 hover:-translate-y-0.5 hover:bg-[#C6FF4D] hover:text-ink hover:shadow-[6px_6px_0px_#0c0b09] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-[3px_3px_0px_#0c0b09]"
         aria-label="Send message"
       >
         <svg
-          width="20"
-          height="20"
+          width="22"
+          height="22"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          strokeWidth="3"
+          strokeWidth="3.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         >

@@ -11,7 +11,6 @@ export default function ProfilePage() {
   const { generatedProfile, loading, error, generateProfile, regenerateProfile } =
     useProfileStore();
 
-  // Auto-generate on mount if no profile
   useEffect(() => {
     if (!generatedProfile && !loading) {
       generateProfile();
@@ -22,25 +21,25 @@ export default function ProfilePage() {
   // Loading state
   if (loading && !generatedProfile) {
     return (
-      <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center">
-        <div className="text-center animate-fade-in">
-          <div className="text-5xl mb-6 animate-float">✨</div>
-          <h2 className="text-xl font-bold mb-2">Crafting your profile...</h2>
-          <p className="text-sm text-muted max-w-sm">
-            Our AI is analyzing your personality and writing a profile that
-            sounds authentically like you. This takes about 30 seconds.
+      <div className="min-h-[calc(100vh-5rem)] flex items-center justify-center p-6">
+        <div className="text-center rounded-3xl border-4 border-ink bg-surface p-10 shadow-[10px_10px_0px_#0c0b09] max-w-md animate-scale-in">
+          <div className="text-5xl mb-6 animate-bounce">✨</div>
+          <h2 className="font-display text-2xl font-black uppercase tracking-tight text-ink mb-2">
+            Crafting Your Profile...
+          </h2>
+          <p className="font-sans text-xs sm:text-sm font-bold text-ink/75 leading-relaxed">
+            Our AI is analyzing your conversation details to build a top-1% profile tailored to your personality.
           </p>
-          <div className="mt-6 flex items-center justify-center gap-2">
-            {['Extracting personality', 'Selecting prompts', 'Writing answers', 'Suggesting photos'].map(
+          <div className="mt-8 flex flex-col gap-2.5">
+            {['Extracting personality hooks', 'Selecting optimal Hinge prompts', 'Writing high-conversion answers', 'Curating photo recommendations'].map(
               (step, i) => (
-                <span
+                <div
                   key={step}
-                  className="shimmer h-2 rounded-full"
-                  style={{
-                    width: `${60 + i * 10}px`,
-                    animationDelay: `${i * 0.3}s`,
-                  }}
-                />
+                  className="flex items-center justify-between rounded-xl border-2 border-ink bg-paper px-4 py-2 font-display text-xs font-black uppercase text-ink shadow-brutal-sm"
+                >
+                  <span>{step}</span>
+                  <span className="h-2 w-2 rounded-full bg-[#C6FF4D] animate-ping" style={{ animationDelay: `${i * 300}ms` }} />
+                </div>
               )
             )}
           </div>
@@ -52,17 +51,27 @@ export default function ProfilePage() {
   // Error state
   if (error && !generatedProfile) {
     return (
-      <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center">
-        <div className="text-center animate-fade-in max-w-md">
-          <div className="text-4xl mb-4">😔</div>
-          <h2 className="text-xl font-bold mb-2">Something went wrong</h2>
-          <p className="text-sm text-muted mb-6">{error}</p>
-          <div className="flex items-center justify-center gap-3">
-            <Link href="/interview" className="btn-secondary">
-              🎙️ Start Interview
+      <div className="min-h-[calc(100vh-5rem)] flex items-center justify-center p-6">
+        <div className="text-center rounded-3xl border-4 border-ink bg-surface p-10 shadow-[10px_10px_0px_#0c0b09] max-w-md animate-scale-in">
+          <div className="text-5xl mb-4">😔</div>
+          <h2 className="font-display text-2xl font-black uppercase tracking-tight text-ink mb-2">
+            Generation Notice
+          </h2>
+          <p className="font-sans text-xs sm:text-sm font-bold text-ink/75 mb-8 leading-relaxed">
+            {error}
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href="/interview"
+              className="w-full sm:w-auto rounded-xl border-3 border-ink bg-surface px-5 py-3 font-display text-xs font-black uppercase tracking-wider text-ink shadow-[4px_4px_0px_#0c0b09] transition-all hover:bg-[#C6FF4D]"
+            >
+              🎙️ Return to Interview
             </Link>
-            <button onClick={() => generateProfile()} className="btn-primary">
-              Try Again
+            <button
+              onClick={() => generateProfile()}
+              className="w-full sm:w-auto rounded-xl border-3 border-ink bg-ink px-5 py-3 font-display text-xs font-black uppercase tracking-wider text-[#C6FF4D] shadow-[4px_4px_0px_#0c0b09] transition-all hover:bg-[#C6FF4D] hover:text-ink"
+            >
+              🔄 Try Again
             </button>
           </div>
         </div>
@@ -74,42 +83,47 @@ export default function ProfilePage() {
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
-      {/* ── Header ────────────────────────────────────── */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 mb-12 pb-6 border-b-4 border-[#121212] animate-fade-in">
+      {/* ── Header Bar ──────────────────────────────── */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 mb-12 pb-6 border-b-4 border-ink animate-fade-in">
         <div>
-          <h1 className="text-4xl font-black uppercase tracking-tighter text-[#121212]">
-            YOUR <span className="text-[#D02020]">HINGE PROFILE</span>
+          <div className="inline-flex items-center gap-2 rounded-full border-2 border-ink bg-[#C6FF4D] px-3.5 py-1 font-display text-xs font-black uppercase tracking-widest text-ink shadow-brutal-sm mb-3">
+            <span className="h-2 w-2 rounded-full bg-ink" />
+            <span>Finished Output</span>
+          </div>
+          <h1 className="font-display text-3xl sm:text-5xl font-black uppercase tracking-tight text-ink">
+            YOUR <span className="inline-block -rotate-1 rounded-2xl border-4 border-ink bg-[#C6FF4D] px-3.5 py-0.5 text-ink shadow-[4px_4px_0px_#0c0b09]">HINGE PROFILE</span>
           </h1>
-          <p className="text-sm font-bold text-neutral-500 uppercase tracking-wider mt-1">
-            Preview, copy, and use on Hinge. Regenerate anytime.
+          <p className="font-sans text-xs sm:text-sm font-bold text-ink/75 uppercase tracking-wider mt-2">
+            Copy prompt answers right into Hinge. Regenerate any section anytime.
           </p>
         </div>
-        <div className="flex items-center gap-4">
-          <Link href="/interview" className="btn-ghost border border-[#121212] bg-white shadow-[3px_3px_0px_0px_#121212] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none text-xs">
+        <div className="flex flex-wrap items-center gap-4">
+          <Link
+            href="/interview"
+            className="rounded-xl border-3 border-ink bg-surface px-4 py-2.5 font-display text-xs font-black uppercase tracking-wider text-ink shadow-[4px_4px_0px_#0c0b09] transition-all hover:-translate-y-0.5 hover:bg-[#C6FF4D] hover:shadow-[6px_6px_0px_#0c0b09]"
+          >
             🎙️ Re-interview
           </Link>
-          <RegenerateBtn
-            onClick={regenerateProfile}
-            loading={loading}
-          />
+          <RegenerateBtn onClick={regenerateProfile} loading={loading} />
         </div>
       </div>
 
-      <div className="grid lg:grid-cols-[400px_1fr] gap-12">
-        {/* ── Hinge Card Preview ──────────────────────── */}
-        <div>
-          <div className="inline-block px-3 py-1 bg-[#1040C0] text-white border-2 border-[#121212] font-black text-xs uppercase tracking-widest mb-4 shadow-[2px_2px_0px_0px_#121212]">
-            📱 Profile Preview
+      {/* ── Profile Content Grid ────────────────────── */}
+      <div className="grid lg:grid-cols-[430px_1fr] gap-12 items-start">
+        {/* Hinge Card Preview Column */}
+        <div className="sticky top-28">
+          <div className="inline-flex items-center gap-2 rounded-xl border-2 border-ink bg-ink px-3.5 py-1.5 font-display text-xs font-black uppercase tracking-widest text-[#C6FF4D] mb-4 shadow-[3px_3px_0px_#0c0b09]">
+            <span>📱 Profile Card Preview</span>
           </div>
           <HingeCard profile={generatedProfile} />
         </div>
 
-        {/* ── Photo Suggestions ──────────────────────── */}
+        {/* Photo Suggestions Column */}
         <div>
-          <div className="inline-block px-3 py-1 bg-[#F0C020] text-[#121212] border-2 border-[#121212] font-black text-xs uppercase tracking-widest mb-4 shadow-[2px_2px_0px_0px_#121212]">
-            📸 Photo Suggestions
+          <div className="inline-flex items-center gap-2 rounded-xl border-2 border-ink bg-[#C6FF4D] px-3.5 py-1.5 font-display text-xs font-black uppercase tracking-widest text-ink mb-4 shadow-[3px_3px_0px_#0c0b09]">
+            <span>📸 Photo Compositions</span>
           </div>
-          <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 xl:grid-cols-2 gap-6">
             {generatedProfile.photoSuggestions.map((photo) => (
               <PhotoSlot
                 key={photo.order}
